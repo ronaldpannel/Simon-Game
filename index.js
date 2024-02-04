@@ -1,4 +1,6 @@
 const container = document.getElementById("container");
+const score = document.getElementById("scoreValue");
+const gameOverDisplay = document.getElementById("gameOver");
 
 const redBtn = document.getElementById("red");
 const blueBtn = document.getElementById("blue");
@@ -8,7 +10,7 @@ const buttons = document.querySelectorAll(".btn");
 const startBtn = document.getElementById("startBtn");
 
 const redAudio = document.getElementById("redAudio");
-const blueBtnAudio = document.getElementById("blueAudio");
+const blueAudio = document.getElementById("blueAudio");
 const greenAudio = document.getElementById("greenAudio");
 const yellowAudio = document.getElementById("yellowAudio");
 const wrongAudio = document.getElementById("wrongAudio");
@@ -37,6 +39,7 @@ function playSimonSequence() {
 
 function highlightButton(color) {
   const button = document.getElementById(color);
+  playSound(color);
   if (button) {
     button.classList.add("active");
     setTimeout(() => {
@@ -48,8 +51,8 @@ function highlightButton(color) {
 function handleButtonClick(color) {
   userSequence.push(color);
   highlightButton(color);
-  if(highlightButton(color) === 'red'){
-    redAudio.play()
+  if (highlightButton(color) === "red") {
+    redAudio.play();
   }
 
   const isEqual = userSequence.every(
@@ -58,14 +61,17 @@ function handleButtonClick(color) {
   if (isEqual) {
     if (userSequence.length === round) {
       round++;
+      score.innerText = round;
       simonSequence.push(generateRandomColor());
       setTimeout(() => {
         playSimonSequence();
       }, 3000);
     }
   } else {
+    container.style.backgroundColor = "orange";
     wrongAudio.play();
     console.log("Game Over");
+    gameOverDisplay.classList.add("gameOverActive");
     resetGame();
   }
 }
@@ -74,8 +80,8 @@ function startGame() {
   simonSequence.push(generateRandomColor());
   playSimonSequence();
 }
- console.log("simon", simonSequence);
- console.log("user", userSequence);
+console.log("simon", simonSequence);
+console.log("user", userSequence);
 
 function resetGame() {
   simonSequence = [];
@@ -83,9 +89,23 @@ function resetGame() {
   round = 1;
   startGame();
 }
-startGame()
+
+function playSound(color) {
+  if (color === "red") {
+    redAudio.play();
+  }
+  if (color === "green") {
+    greenAudio.play();
+  }
+  if (color === "blue") {
+    blueAudio.play();
+  }
+  if (color === "yellow") {
+    yellowAudio.play();
+  }
+}
+startGame();
 
 startBtn.addEventListener("click", (e) => {
-  location.reload()
-;
+  location.reload();
 });
