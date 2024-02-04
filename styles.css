@@ -26,13 +26,22 @@ body {
   padding: 0 10px;
   border-radius: 20px;
   position: absolute;
-  top: 53%;
+  top: 30%;
   color: orangered;
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: 2px;
   font-weight: bold;
   text-shadow: 2px 2px 2px white;
   z-index: 50;
+}
+.simonSays {
+  position: absolute;
+  padding-left: 20px;
+  color: white;
+  font-weight: bold;
+  top: 56%;
+  display: none;
+  z-index: 60;
 }
 .title {
   color: orangered;
@@ -129,15 +138,8 @@ body {
 .gameOverActive {
   display: block;
 }
-/* @media (max-width: 400px) {
-  .container {
-    background-color: yellow;
+@media (max-width: 400px) {
+  .gameOver {
+    font-size: 18px;
   }
-  .redBtn,
-  .yellowBtn,
-  .greenBtn,
-  .blueBtn {
-    height: 50px;
-    width: 50px;
-  }
-} */
+}

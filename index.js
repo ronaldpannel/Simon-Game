@@ -1,6 +1,7 @@
 const container = document.getElementById("container");
 const score = document.getElementById("scoreValue");
 const gameOverDisplay = document.getElementById("gameOver");
+const simonSays = document.getElementById("simonSays");
 
 const redBtn = document.getElementById("red");
 const blueBtn = document.getElementById("blue");
@@ -51,6 +52,7 @@ function highlightButton(color) {
 function handleButtonClick(color) {
   userSequence.push(color);
   highlightButton(color);
+  simonSays.classList.remove("gameOverActive");
   if (highlightButton(color) === "red") {
     redAudio.play();
   }
@@ -64,6 +66,7 @@ function handleButtonClick(color) {
       score.innerText = round;
       simonSequence.push(generateRandomColor());
       setTimeout(() => {
+        simonSays.classList.add("gameOverActive");
         playSimonSequence();
       }, 3000);
     }
@@ -79,9 +82,8 @@ function handleButtonClick(color) {
 function startGame() {
   simonSequence.push(generateRandomColor());
   playSimonSequence();
+  simonSays.classList.add("gameOverActive");
 }
-console.log("simon", simonSequence);
-console.log("user", userSequence);
 
 function resetGame() {
   simonSequence = [];
